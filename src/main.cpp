@@ -1,6 +1,5 @@
 // Copyright 2022 NNTU-CS
 #include "tree.h"
-
 #include <iostream>
 #include <vector>
 #include <chrono>
