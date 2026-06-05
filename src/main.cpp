@@ -109,7 +109,7 @@ int main() {
                         end - start).count();
 
     PMTree treePerm1(testInput);
-    int randomNum1 = getRandomPermNumber(allPermsResult.size());
+    int randomNum1 = getRandomPermNumber(static_cast<int>(allPermsResult.size()));
     start = std::chrono::high_resolution_clock::now();
     getPerm1(treePerm1, randomNum1);
     end = std::chrono::high_resolution_clock::now();
@@ -117,7 +117,7 @@ int main() {
                      end - start).count();
 
     PMTree treePerm2(testInput);
-    int randomNum2 = getRandomPermNumber(allPermsResult.size());
+    int randomNum2 = getRandomPermNumber(static_cast<int>(allPermsResult.size()));
     start = std::chrono::high_resolution_clock::now();
     getPerm2(treePerm2, randomNum2);
     end = std::chrono::high_resolution_clock::now();
