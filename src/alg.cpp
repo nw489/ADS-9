@@ -62,7 +62,7 @@ std::vector<char> getPerm1(PMTree& tree, int num) {
   return allPerms[num - 1];
 }
 
-int64_t factorial(int n) {
+static int64_t fact(int n) {
   if (n <= 1) return 1;
   int64_t result = 1;
   for (int i = 2; i <= n; ++i) {
@@ -82,7 +82,7 @@ std::vector<char> getPerm2(PMTree& tree, int num) {
   int remaining = num - 1;
 
   while (!current->children.empty()) {
-    int subtreeSize = factorial(current->children.size() - 1);
+    int subtreeSize = fact(static_cast<int>(current->children.size()) - 1);
     int childIndex = remaining / subtreeSize;
     if (childIndex >= static_cast<int>(current->children.size())) {
       return std::vector<char>();
