@@ -1,7 +1,7 @@
 // Copyright 2022 NNTU-CS
 #include "tree.h"
-#include <vector>
 #include <cstdint>
+#include <vector>
 
 void PMTree::buildTree(PMNode* node, std::vector<char>& remaining) {
   if (remaining.empty()) {
