@@ -1,27 +1,24 @@
 // Copyright 2022 NNTU-CS
-#include <iostream>
-#include <fstream>
-#include <locale>
-#include <cstdlib>
-#include <algorithm>
 #include "tree.h"
+#include <vector>
+#include <cstdint>
 
 void PMTree::buildTree(PMNode* node, std::vector<char>& remaining) {
   if (remaining.empty()) {
     return;
   }
-  
+
   for (size_t i = 0; i < remaining.size(); ++i) {
     PMNode* child = new PMNode(remaining[i]);
     node->children.push_back(child);
-    
+
     std::vector<char> nextRemaining;
     for (size_t j = 0; j < remaining.size(); ++j) {
       if (i != j) {
         nextRemaining.push_back(remaining[j]);
       }
     }
-    
+
     buildTree(child, nextRemaining);
   }
 }
@@ -41,7 +38,7 @@ void collectPerms(PMNode* node, std::vector<char>& current,
     result.push_back(current);
     return;
   }
-  
+
   for (auto child : node->children) {
     current.push_back(child->value);
     collectPerms(child, current, result);
@@ -52,25 +49,25 @@ void collectPerms(PMNode* node, std::vector<char>& current,
 std::vector<std::vector<char>> getAllPerms(PMTree& tree) {
   std::vector<std::vector<char>> result;
   std::vector<char> current;
-  
+
   collectPerms(tree.getRoot(), current, result);
-  
+
   return result;
 }
 
 std::vector<char> getPerm1(PMTree& tree, int num) {
   std::vector<std::vector<char>> allPerms = getAllPerms(tree);
-  
+
   if (num < 1 || num > static_cast<int>(allPerms.size())) {
     return std::vector<char>();
   }
-  
+
   return allPerms[num - 1];
 }
 
-long long factorial(int n) {
+int64_t factorial(int n) {
   if (n <= 1) return 1;
-  long long result = 1;
+  int64_t result = 1;
   for (int i = 2; i <= n; ++i) {
     result *= i;
   }
@@ -79,29 +76,29 @@ long long factorial(int n) {
 
 std::vector<char> getPerm2(PMTree& tree, int num) {
   std::vector<std::vector<char>> allPerms = getAllPerms(tree);
-  
+
   if (num < 1 || num > static_cast<int>(allPerms.size())) {
     return std::vector<char>();
   }
-  
+
   std::vector<char> result;
   PMNode* current = tree.getRoot();
   int remaining = num - 1;
-  
+
   while (!current->children.empty()) {
     int subtreeSize = factorial(current->children.size() - 1);
-    
+
     int childIndex = remaining / subtreeSize;
-    
+
     if (childIndex >= static_cast<int>(current->children.size())) {
       return std::vector<char>();
     }
-    
+
     current = current->children[childIndex];
     result.push_back(current->value);
-    
+
     remaining = remaining % subtreeSize;
   }
-  
+
   return result;
 }
