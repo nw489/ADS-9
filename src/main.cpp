@@ -44,10 +44,11 @@ std::vector<char> createTestVector(int size) {
 }
 
 int main() {
-  std::cout << "=== Генерация перестановок с использованием дерева вариантов ==="
-            << std::endl << std::endl;
+  std::cout << "=== Генерация перестановок с использованием дерева "
+            << "вариантов ===" << std::endl << std::endl;
 
-  std::cout << "--- Задание 1: Построение дерева перестановок ---" << std::endl;
+  std::cout << "--- Задание 1: Построение дерева перестановок ---"
+            << std::endl;
   std::vector<char> input1 = {'1', '2', '3'};
   PMTree tree1(input1);
   std::cout << "Дерево построено для набора: ";
@@ -89,7 +90,6 @@ int main() {
             << "алфавита" << std::endl << std::endl;
 
   std::ofstream timingFile("result/timing_data.txt");
-
   timingFile << "# n\t\tgetAllPerms(мкс)\tgetPerm1(мкс)\tgetPerm2(мкс)"
              << std::endl;
 
