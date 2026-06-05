@@ -1,5 +1,5 @@
 // Copyright 2022 NNTU-CS
-#include "tree.h"
+#include "../include/tree.h"
 #include <cstdint>
 #include <vector>
 
