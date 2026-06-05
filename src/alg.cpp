@@ -1,25 +1,22 @@
 // Copyright 2022 NNTU-CS
-#include "../include/tree.h"
-
 #include <cstdint>
 #include <vector>
+
+#include "../include/tree.h"
 
 void PMTree::buildTree(PMNode* node, std::vector<char>& remaining) {
   if (remaining.empty()) {
     return;
   }
-
   for (size_t i = 0; i < remaining.size(); ++i) {
     PMNode* child = new PMNode(remaining[i]);
     node->children.push_back(child);
-
     std::vector<char> nextRemaining;
     for (size_t j = 0; j < remaining.size(); ++j) {
       if (i != j) {
         nextRemaining.push_back(remaining[j]);
       }
     }
-
     buildTree(child, nextRemaining);
   }
 }
@@ -39,7 +36,6 @@ void collectPerms(PMNode* node, std::vector<char>& current,
     result.push_back(current);
     return;
   }
-
   for (auto child : node->children) {
     current.push_back(child->value);
     collectPerms(child, current, result);
@@ -76,15 +72,14 @@ std::vector<char> getPerm2(PMTree& tree, int num) {
   if (num < 1 || num > static_cast<int>(allPerms.size())) {
     return std::vector<char>();
   }
-
   std::vector<char> result;
   PMNode* current = tree.getRoot();
   int remaining = num - 1;
-
   while (!current->children.empty()) {
-    int subtreeSize = fact(static_cast<int>(current->children.size()) - 1);
+    int childrenCount = static_cast<int>(current->children.size());
+    int subtreeSize = fact(childrenCount - 1);
     int childIndex = remaining / subtreeSize;
-    if (childIndex >= static_cast<int>(current->children.size())) {
+    if (childIndex >= childrenCount) {
       return std::vector<char>();
     }
     current = current->children[childIndex];
