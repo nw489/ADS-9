@@ -1,3 +1,4 @@
+// src/alg.cpp
 // Copyright 2022 NNTU-CS
 #include "tree.h"
 #include <cstdint>
@@ -49,19 +50,15 @@ void collectPerms(PMNode* node, std::vector<char>& current,
 std::vector<std::vector<char>> getAllPerms(PMTree& tree) {
   std::vector<std::vector<char>> result;
   std::vector<char> current;
-
   collectPerms(tree.getRoot(), current, result);
-
   return result;
 }
 
 std::vector<char> getPerm1(PMTree& tree, int num) {
   std::vector<std::vector<char>> allPerms = getAllPerms(tree);
-
   if (num < 1 || num > static_cast<int>(allPerms.size())) {
     return std::vector<char>();
   }
-
   return allPerms[num - 1];
 }
 
@@ -76,7 +73,6 @@ int64_t factorial(int n) {
 
 std::vector<char> getPerm2(PMTree& tree, int num) {
   std::vector<std::vector<char>> allPerms = getAllPerms(tree);
-
   if (num < 1 || num > static_cast<int>(allPerms.size())) {
     return std::vector<char>();
   }
@@ -87,18 +83,13 @@ std::vector<char> getPerm2(PMTree& tree, int num) {
 
   while (!current->children.empty()) {
     int subtreeSize = factorial(current->children.size() - 1);
-
     int childIndex = remaining / subtreeSize;
-
     if (childIndex >= static_cast<int>(current->children.size())) {
       return std::vector<char>();
     }
-
     current = current->children[childIndex];
     result.push_back(current->value);
-
     remaining = remaining % subtreeSize;
   }
-
   return result;
 }
