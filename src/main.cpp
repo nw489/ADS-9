@@ -1,11 +1,10 @@
 // Copyright 2022 NNTU-CS
 #include "tree.h"
-#include <iostream>
-#include <vector>
 #include <chrono>
 #include <fstream>
-#include <random>
 #include <iomanip>
+#include <iostream>
+#include <random>
 
 void printPermutation(const std::vector<char>& perm) {
   for (char c : perm) {
