@@ -29,7 +29,6 @@ PMTree::PMTree(std::vector<char> elements) {
 PMTree::~PMTree() {
   delete root;
 }
-
 void collectPerms(PMNode* node, std::vector<char>& current,
                   std::vector<std::vector<char>>& result) {
   if (node->children.empty() && node->value != '\0') {
